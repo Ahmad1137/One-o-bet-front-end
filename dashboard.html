@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .navbar {
+        color: white;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 250px; /* Adjust width for side menu */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #0f0f0f !important;
+        padding-top: 10px;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%); /* Initially hide navbar */
+        overflow-y: auto; /* Make sidebar scrollable */
+        z-index: 1050;
+      }
+      .navbar.show {
+        transform: translateX(0); /* Show navbar on toggle */
+      }
+      .navbar-toggler {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1100;
+        border: none;
+        background-color: transparent;
+        margin-top: 15px;
+      }
+      .navbar.show ~ .navbar-toggler {
+        left: 244px;
+      }
+      .navbar-toggler-icon {
+        width: 30px;
+        height: 3px;
+        background-color: black;
+        display: block;
+        position: relative;
+      }
+      .navbar-toggler-icon::before,
+      .navbar-toggler-icon::after {
+        content: "";
+        width: 30px;
+        height: 3px;
+        background-color: black;
+        display: block;
+        position: absolute;
+        left: 0;
+      }
+      .navbar-toggler-icon::before {
+        top: -10px;
+      }
+      .navbar-toggler-icon::after {
+        top: 10px;
+      }
+      .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0px;
+        width: 100%;
+      }
+      .navbar-nav img,
+      .navbar-nav h1 {
+        margin: 0;
+      }
+      .navbar-nav p {
+        margin: 20px 0;
+      }
+      .navbar-nav ul {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+      }
+      .navbar-nav ul li img {
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg); /* Rotate one full turn */
+        }
+      }
+      .content {
+        margin-left: 0;
+        transition: margin-left 0.3s ease-in-out;
+      }
+      .content.shifted {
+        margin-left: 250px; /* Same as the sidebar width */
+      }
+      .navbar-nav ul li button:hover,
+      .navbar-nav ul li button:focus,
+      .navbar-nav ul li button.active {
+        background-color: #4ae810;
+        color: white;
+        text-decoration: none; /* Ensure no underline on hover, focus, and active */
+      }
+      .navbar-nav div {
+        display: flex;
+        align-items: center;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        z-index: 1000;
+        position: relative;
+        transition: left 0.3s ease-in-out;
+      }
+      .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+        white-space: nowrap;
+        z-index: 1000;
+        position: relative;
+      }
+      .marquee-text {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 20s linear infinite;
+      }
+      .marquee-text {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 20s linear infinite;
+        animation-play-state: running; /* Default animation state */
+        white-space: nowrap;
+      }
+      .marquee-text:hover {
+        animation-play-state: paused; /* Pause animation on hover */
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        25% {
+          transform: translateX(0%);
+        }
+        75% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+      }
+      .overlay.show {
+        display: block;
+      }
+      .navbar-nav ul li .sidebar-item {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .navbar-nav ul li .sidebar-item img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+      }
+      .navbar-nav ul li .sidebar-item button {
+        border: none;
+        background: none;
+        color: white;
+        cursor: pointer;
+        padding: 0;
+      }
+      .navbar-nav ul li .sidebar-item:hover {
+        background-color: #16eb0b; /* Darker background on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay" id="overlay"></div>
+    <nav class="navbar navbar-light bg-light" id="navbar">
+      <div class="navbar-nav">
+        <div>
+          <img
+            src="./public/assets/images/logo.webp 512.webp"
+            alt="1obet-logo"
+            width="40"
+            height="30"
+          />
+          <h1>1OBET</h1>
+        </div>
+        <p>Main Menu</p>
+        <ul>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/dashboard.png"
+                alt=""
+              />
+              <button class="btn btn-link active">Dashboard</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/tennis.png"
+                alt=""
+              />
+              <button class="btn btn-link">Tennis</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/cricket.png"
+                alt=""
+              />
+              <a href="cricket.html">
+                <button class="btn btn-link">Cricket</button>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/soccer.png"
+                alt=""
+              />
+              <button class="btn btn-link">Soccer</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/current-position.png"
+                alt=""
+              />
+              <button class="btn btn-link">Current Position</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/horse-race.png"
+                alt=""
+              />
+              <button class="btn btn-link">Horse Race</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/all-sports.png"
+                alt=""
+              />
+              <button class="btn btn-link">Sports Book</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/bet-fair-games.png"
+                alt=""
+              />
+              <button class="btn btn-link">Betfair Games</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                alt=""
+              />
+              <button class="btn btn-link">Evaluation Casino</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                alt=""
+              />
+              <button class="btn btn-link">1obet Casino</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/results.png"
+                alt=""
+              />
+              <button class="btn btn-link">Result</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                alt=""
+              />
+              <button class="btn btn-link">Ezugi Casino</button>
+            </div>
+          </li>
+          <li>
+            <div class="d-flex align-items-center sidebar-item">
+              <img
+                src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                alt=""
+                style="color: #f8f9fa"
+              />
+              <button class="btn btn-link">120 British Casino</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <a href="#" class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </a>
+    <div class="content" id="content">
+      <div class="header">
+        <div class="mx-auto">
+          <span class="navbar-brand mb-0 h1 text-center">Bettor</span>
+        </div>
+        <div class="ml-auto">
+          <span class="navbar-text">1-B:2378</span>
+          <span class="navbar-text ml-3">2-L:0</span>
+          <span class="navbar-text ml-3">Username</span>
+        </div>
+      </div>
+      <div class="marquee-container">
+        <div class="marquee-text">
+          Welcome to 1obet.com - Announcement - All casino Profit Loss will be 1
+          to 2 Ratio - Her casino may Jeet Har 1 ka 2 ho ge - Welcome to
+          Exchange - Zero commissions on chota bara, kalli jotta, fancies
+        </div>
+      </div>
+      <!-- Main content goes here -->
+      <div></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".navbar-toggler").click(function () {
+          $("#navbar").toggleClass("show");
+          $("#overlay").toggleClass("show");
+          $("#content").toggleClass("shifted");
+          $(this).toggleClass("toggled");
+        });
+
+        $(".navbar-nav ul li button").click(function () {
+          $(".navbar-nav ul li button").removeClass("active");
+          $(this).addClass("active");
+        });
+
+        $("#overlay").click(function () {
+          $("#navbar").removeClass("show");
+          $(this).removeClass("show");
+          $("#content").removeClass("shifted");
+        });
+      });
+    </script>
+  </body>
+</html>
