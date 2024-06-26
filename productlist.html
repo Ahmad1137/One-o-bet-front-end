@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Product List</title>
+  </head>
+  <body>
+    <h1>Products Details</h1>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>DiscountPercentage</th>
+          <th>Rating</th>
+          <th>Stock</th>
+          <th>brand</th>
+          <th>Category</th>
+          <th>Thumbnail</th>
+        </tr>
+      </thead>
+      <tbody id="tableRow"></tbody>
+    </table>
+    <script>
+      fetch("https://dummyjson.com/products")
+        .then((response) => response.json())
+        .then((res) => {
+          const data = res.products;
+          let rows = "";
+          data.forEach((product) => {
+            rows += `<tr>
+                    <td>${product.id}</td>
+                    <td>${product.title}</td>
+                    <td>${product.description}</td>
+                    <td>${product.price}</td>
+                    <td>${product.discountPercentage}</td>
+                    <td>${product.rating}</td>
+                    <td>${product.stock}</td>
+                    <td>${product.brand}</td>
+                    <td>${product.category}</td>
+                    <td><img src="${product.thumbnail}" style="width:60%"/></td>
+                    </tr>`;
+          });
+          document.getElementById("tableRow").innerHTML = rows;
+        })
+        .catch((error) => console.log(error));
+    </script>
+  </body>
+</html>
