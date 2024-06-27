@@ -10,6 +10,41 @@
     <title>Product List</title>
   </head>
   <body>
+    <table>
+      <td id="market0-runner0">
+        <div class="d-flex justify-content-end mt-3 ml-5 w-100">
+          <div>
+            <span class="bg-black back_lay">Back</span>
+            <div class="back d-flex justify-content-between">
+              <!-- Back odds will be dynamically added here -->
+            </div>
+          </div>
+          <div style="margin-left: 4px">
+            <span class="bg-black back_lay">Lay</span>
+            <div class="lay d-flex justify-content-between">
+              <!-- Lay odds will be dynamically added here -->
+            </div>
+          </div>
+        </div>
+      </td>
+      <td id="market0-runner1">
+        <div class="d-flex justify-content-end mt-3 ml-5 w-100">
+          <div>
+            <span class="bg-black back_lay">Back</span>
+            <div class="back d-flex justify-content-between">
+              <!-- Back odds will be dynamically added here -->
+            </div>
+          </div>
+          <div style="margin-left: 4px">
+            <span class="bg-black back_lay">Lay</span>
+            <div class="lay d-flex justify-content-between">
+              <!-- Lay odds will be dynamically added here -->
+            </div>
+          </div>
+        </div>
+      </td>
+      <!-- Repeat for other market and runner combinations -->
+    </table>
     <h1>Products Details</h1>
     <table class="table table-hover">
       <thead>
@@ -51,6 +86,128 @@
           document.getElementById("tableRow").innerHTML = rows;
         })
         .catch((error) => console.log(error));
+    </script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+      // Replace with your socket URL
+      const socketUrl = "http://production.1obet.net/";
+      const eventId = "33374736"; // Replace with your event ID
+
+      // Establish socket connection
+      const socket = io(socketUrl, { path: "/websocket/" });
+      function handleOddsData(data) {
+        // Implement logic to handle odds data
+        console.log("Received odds data:", data);
+        // Example: Update UI or perform calculations
+      }
+      socket.on("connect", () => {
+        socket.emit("join", "#" + eventId);
+        socket.on("odds", (data) => {
+          handleOddsData(data);
+        });
+        socket.on("event_info", (data) => {
+          console.log("event_info", data);
+          const { marketIds } = data;
+
+          marketIds.forEach((market, marketIndex) => {
+            if (marketIndex <= 1) {
+              market.last_odds.runners.forEach((runner, runnerIndex) => {
+                const lastOdds = runner.ExchangePrices;
+                updateMarketOdds(marketIndex, runnerIndex, lastOdds);
+              });
+            }
+          });
+          const { cricket } = data;
+          // console.log(cricket);
+          if (cricket) {
+            const key = data?.seriesKey || null;
+            if (key) {
+              setSeriesKey(key); // Assuming setSeriesKey is defined
+            } else {
+              setSeriesKey("UNKNOWN"); // Handle series key not found
+            }
+            const parsedCricket = parseCricketData(cricket); // Define parseCricketData function
+            setLiveScoreData(parsedCricket); // Assuming setLiveScoreData is defined
+          } else {
+            setSeriesKey("UNKNOWN"); // Handle case where cricket data is not available
+          }
+          handleNewOddsData(data); // Define handleNewOddsData function
+        });
+        socket.on("inplay", (data) => {
+          if (data?.eventID == eventId) setRaceStatus(data); // Assuming setRaceStatus is defined
+        });
+        socket.on("winnerForRacing ", (data) => {
+          // Handle winnerForRacing event
+        });
+      });
+
+      function updateMarketOdds(marketIndex, runnerIndex, odds) {
+        const availableToBack = odds.AvailableToBack;
+        const availableToLay = odds.AvailableToLay;
+
+        const backContainer = document.querySelector(
+          `#market${marketIndex}-runner${runnerIndex} .back`
+        );
+        const layContainer = document.querySelector(
+          `#market${marketIndex}-runner${runnerIndex} .lay`
+        );
+
+        updateOddsContainer(backContainer, availableToBack);
+        updateOddsContainer(layContainer, availableToLay);
+      }
+
+      function updateOddsContainer(container, odds) {
+        container.innerHTML = "";
+
+        odds.forEach((odd) => {
+          const price = odd.price;
+          const size = odd.size;
+
+          const oddElement = document.createElement("span");
+          oddElement.classList.add(
+            "d-flex",
+            "justify-content-center",
+            "align-items-center",
+            "custom-box"
+          );
+          oddElement.innerHTML = `
+            <div class="d-flex flex-column align-items-center">
+                <span>${price}</span>
+                <span>${size}K</span>
+            </div>
+        `;
+
+          container.appendChild(oddElement);
+        });
+      }
+      socket.on("score", (data) => {
+        const key = seriesKeyRef.current; // Assuming seriesKeyRef is defined
+        if (key && key === data.seriesKey) {
+          setLiveScoreData(data); // Assuming setLiveScoreData is defined
+        }
+      });
+
+      socket.on("cricket_score_api", (data) => {
+        const apiEventId = data.eventId;
+        if (apiEventId === eventId) {
+          setLiveScoreData(data); // Assuming setLiveScoreData is defined
+        }
+      });
+
+      socket.on("fancy_odds", (data) => {
+        handleFancyBookMakerData(data); // Define handleFancyBookMakerData function
+      });
+
+      // Clean up on component unmount or elsewhere in your logic
+      function cleanupSocket() {
+        socket.disconnect();
+        // Reset state or variables as needed
+      }
+
+      // Call cleanupSocket() when you want to disconnect from the socket
+
+      // Example usage:
+      // cleanupSocket(); // Call this function to disconnect from the socket
     </script>
   </body>
 </html>

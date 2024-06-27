@@ -8,6 +8,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <!-- <style>
       .navbar {
         color: white;
@@ -278,6 +279,11 @@
             background-color: rgb(141, 210, 240);
             margin-right: 0.1rem;
         }
+        .custom-bg-color-black
+        {
+          background-color: rgb(141, 210, 240) ;
+        }
+
         .custom-box-lay {
             width: 63px;
             margin-top: 2px;
@@ -630,100 +636,32 @@
                 </p>
               </div>
             </td>
-            <td>
-            <div class="d-flex justify-content-end mt-3 ml-5 w-100">
-              <div>
-                <span class="bg-black text-white back_lay">Back</span>
-                <div>
-                  <div class="d-flex justify-content-between">
-                    <span class="d-flex justify-content-center align-items-center custom-box-black">
-                      <div class="d-flex flex-column align-items-center ">
-                        <span class="">2.14</span>
-                        <span class="">8.4K</span>
-                      </div>
-                    </span>
-                    <span class="d-flex justify-content-center align-items-center custom-box-black" >
-                      <div class="d-flex flex-column align-items-center">
-                        <span class="" >2.16</span>
-                        <span class="">3.4K</span>
-                      </div>
-                    </span>
-                    <span class="d-flex justify-content-center align-items-center custom-box-black">
-                    <div class="d-flex flex-column align-items-center">
-                        <span class="">2.18</span>
-                        <span class="">1.5K</span>
-                      </div>
-                    </span>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                    <span class="d-flex justify-content-center align-items-center custom-box-black">
-                      <div style="display: flex; align-items: center; flex-direction: column;">
-                        <span class="">1.81</span>
-                        <span class="">63K</span>
-                      </div>
-                    </span>
-                    <span class="d-flex justify-content-center align-items-center custom-box-black">
-                        <div style="display: flex; align-items: center; flex-direction: column;">
-                          <span class="" >1.82</span>
-                          <span class="">13.2K</span>
-                        </div>
-                    </span>
-                      <span class="d-flex justify-content-center align-items-center custom-box-black">
-                          <div style="display: flex; align-items: center; flex-direction: column;">
-                            <span class="">1.83</span>
-                            <span class="">618</span>
-                          </div>
-                        </span>
-                      </div>
-                </div>
+             <td>
+        <div class="d-flex justify-content-end mt-3 ml-5 w-100">
+          <div>
+            <span class="bg-black text-white back_lay">Back</span>
+            <div>
+              <div id="market0-runner0-back" class="d-flex justify-content-between ">
+                <!-- Dynamic Back Odds data will be inserted here by JavaScript -->
               </div>
-                  <div style="margin-left: 4px;">
-                    <span class="bg-black text-white back_lay">Lay</span>
-                       <div>
-                  <div class="d-flex justify-content-between">
-                    <span class="d-flex justify-content-center align-items-center custom-box-lay">
-                      <div class="d-flex flex-column align-items-center ">
-                        <span >2.14</span>
-                        <span >8.4K</span>
-                      </div>
-                    </span>
-                    <span class="d-flex justify-content-center align-items-center custom-box-lay" >
-                      <div class="d-flex flex-column align-items-center">
-                        <span class="">2.16</span>
-                        <span class="">3.4K</span>
-                      </div>
-                    </span>
-                    <span class="d-flex justify-content-center align-items-center custom-box-lay">
-                    <div class="d-flex flex-column align-items-center">
-                        <span class="">2.18</span>
-                        <span class="">1.5K</span>
-                      </div>
-                    </span>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                    <span class="d-flex justify-content-center align-items-center custom-box-lay">
-                      <div style="display: flex; align-items: center; flex-direction: column;">
-                        <span class="">1.81</span>
-                        <span class="">63K</span>
-                      </div>
-                    </span>
-                    <span class="d-flex justify-content-center align-items-center custom-box-lay">
-                        <div style="display: flex; align-items: center; flex-direction: column;">
-                          <span class="" >1.82</span>
-                          <span class="">13.2K</span>
-                        </div>
-                    </span>
-                      <span class="d-flex justify-content-center align-items-center custom-box-lay">
-                          <div style="display: flex; align-items: center; flex-direction: column;">
-                            <span class="">1.83</span>
-                            <span class="">618</span>
-                          </div>
-                        </span>
-                      </div>
-                    </div>     
-                  </div>
+              <div id="market0-runner1-back" class="d-flex justify-content-between ">
+                <!-- Dynamic Back Odds data will be inserted here by JavaScript -->
               </div>
-              </td>
+            </div>
+          </div>
+          <div style="margin-left: 4px;">
+            <span class="bg-black text-white back_lay">Lay</span>
+            <div>
+              <div id="market0-runner0-lay" class="d-flex justify-content-between ">
+                <!-- Dynamic Lay Odds data will be inserted here by JavaScript -->
+              </div>
+              <div id="market0-runner1-lay" class="d-flex justify-content-between">
+                <!-- Dynamic Lay Odds data will be inserted here by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
           </tr>
         </tbody>
       </table>
@@ -1026,7 +964,7 @@
                 </p>
               </div>
             </td>
-            <td>
+            <td >
             <div class="d-flex justify-content-end mt-3 ml-5 w-100">
               <div>
                 <span class="bg-black text-white back_lay">Back</span>
@@ -1175,6 +1113,10 @@
             </tr>
         </tbody>
     </table>
+    
+
+      <!-- Repeat for other market and runner combinations -->
+    
       </div>
     </div>
     
@@ -1203,5 +1145,73 @@
         });
       });
     </script>
+    
+   <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+  <script>
+  const socketUrl = "http://production.1obet.net/";
+  const eventId = "33374736";
+
+  const socket = io(socketUrl, { path: "/websocket/" });
+
+  socket.on("connect", () => {
+    socket.emit("join", "#" + eventId);
+
+    socket.on("odds", (data) => {
+      handleOddsData(data);
+    });
+
+    socket.on("event_info", (data) => {
+      console.log("event_info", data);
+      const { marketIds } = data;
+
+      marketIds.forEach((market, marketIndex) => {
+        if (marketIndex <= 1) {
+          market.last_odds.runners.forEach((runner, runnerIndex) => {
+            const lastOdds = runner.ExchangePrices;
+            updateMarketOdds(marketIndex, runnerIndex, lastOdds);
+          });
+        }
+      });
+    });
+  });
+
+  function handleOddsData(data) {
+    console.log("Received odds data:", data);
+  }
+
+  function updateMarketOdds(marketIndex, runnerIndex, odds) {
+    const availableToBack = odds.AvailableToBack;
+    const availableToLay = odds.AvailableToLay;
+
+    const backContainer = document.querySelector(`#market${marketIndex}-runner${runnerIndex}-back`);
+    const layContainer = document.querySelector(`#market${marketIndex}-runner${runnerIndex}-lay`);
+
+    updateOddsContainer(backContainer, availableToBack, "rgb(141, 210, 240)",);
+    updateOddsContainer(layContainer, availableToLay, "rgb(255, 175, 178)",);
+  }
+
+  function updateOddsContainer(container, odds, bgColor) {
+    container.innerHTML = "";
+
+    odds.forEach((odd) => {
+      const price = odd.price;
+      const size = odd.size;
+
+      const oddElement = document.createElement("span");
+      oddElement.classList.add("d-flex", "justify-content-center", "align-items-center", "custom-box","mb-1");
+      oddElement.style.backgroundColor = bgColor;
+
+      oddElement.innerHTML = `
+        <div class="d-flex flex-column align-items-center" style="width:63px;">
+            <span>${price}</span>
+            <span>${size}K</span>
+        </div>
+      `;
+
+      container.appendChild(oddElement);
+    });
+  }
+</script>
+
   </body>
 </html>
