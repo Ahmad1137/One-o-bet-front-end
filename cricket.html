@@ -637,31 +637,22 @@
               </div>
             </td>
              <td>
-        <div class="d-flex justify-content-end mt-3 ml-5 w-100">
-          <div>
-            <span class="bg-black text-white back_lay">Back</span>
-            <div>
-              <div id="market0-runner0-back" class="d-flex justify-content-between ">
-                <!-- Dynamic Back Odds data will be inserted here by JavaScript -->
-              </div>
-              <div id="market0-runner1-back" class="d-flex justify-content-between ">
-                <!-- Dynamic Back Odds data will be inserted here by JavaScript -->
-              </div>
-            </div>
-          </div>
-          <div style="margin-left: 4px;">
-            <span class="bg-black text-white back_lay">Lay</span>
-            <div>
-              <div id="market0-runner0-lay" class="d-flex justify-content-between ">
-                <!-- Dynamic Lay Odds data will be inserted here by JavaScript -->
-              </div>
-              <div id="market0-runner1-lay" class="d-flex justify-content-between">
-                <!-- Dynamic Lay Odds data will be inserted here by JavaScript -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </td>
+  <div class="d-flex justify-content-end mt-3 ml-5 w-100">
+    <div>
+      <span class="bg-black text-white back_lay">Back</span>
+      <div id="back-container">
+        <!-- Dynamic Back Odds data will be inserted here by JavaScript -->
+      </div>
+    </div>
+    <div style="margin-left: 4px;">
+      <span class="bg-black text-white back_lay">Lay</span>
+      <div id="lay-container">
+        <!-- Dynamic Lay Odds data will be inserted here by JavaScript -->
+      </div>
+    </div>
+  </div>
+</td>
+
           </tr>
         </tbody>
       </table>
@@ -1146,72 +1137,86 @@
       });
     </script>
     
-   <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-  <script>
-  const socketUrl = "http://production.1obet.net/";
-  const eventId = "33374736";
+ <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+const socketUrl = "http://production.1obet.net/";
+const eventId = "33374736";
 
-  const socket = io(socketUrl, { path: "/websocket/" });
+const socket = io(socketUrl, { path: "/websocket/" });
 
-  socket.on("connect", () => {
-    socket.emit("join", "#" + eventId);
+socket.on("connect", () => {
+  socket.emit("join", "#" + eventId);
 
-    socket.on("odds", (data) => {
-      handleOddsData(data);
-    });
-
-    socket.on("event_info", (data) => {
-      console.log("event_info", data);
-      const { marketIds } = data;
-
-      marketIds.forEach((market, marketIndex) => {
-        if (marketIndex <= 1) {
-          market.last_odds.runners.forEach((runner, runnerIndex) => {
-            const lastOdds = runner.ExchangePrices;
-            updateMarketOdds(marketIndex, runnerIndex, lastOdds);
-          });
-        }
-      });
-    });
+  socket.on("odds", (data) => {
+    handleOddsData(data);
   });
 
-  function handleOddsData(data) {
-    console.log("Received odds data:", data);
-  }
+  socket.on("event_info", (data) => {
+    console.log("event_info", data);
+    const { marketIds } = data;
 
-  function updateMarketOdds(marketIndex, runnerIndex, odds) {
-    const availableToBack = odds.AvailableToBack;
-    const availableToLay = odds.AvailableToLay;
-
-    const backContainer = document.querySelector(`#market${marketIndex}-runner${runnerIndex}-back`);
-    const layContainer = document.querySelector(`#market${marketIndex}-runner${runnerIndex}-lay`);
-
-    updateOddsContainer(backContainer, availableToBack, "rgb(141, 210, 240)",);
-    updateOddsContainer(layContainer, availableToLay, "rgb(255, 175, 178)",);
-  }
-
-  function updateOddsContainer(container, odds, bgColor) {
-    container.innerHTML = "";
-
-    odds.forEach((odd) => {
-      const price = odd.price;
-      const size = odd.size;
-
-      const oddElement = document.createElement("span");
-      oddElement.classList.add("d-flex", "justify-content-center", "align-items-center", "custom-box","mb-1");
-      oddElement.style.backgroundColor = bgColor;
-
-      oddElement.innerHTML = `
-        <div class="d-flex flex-column align-items-center" style="width:63px;">
-            <span>${price}</span>
-            <span>${size}K</span>
-        </div>
-      `;
-
-      container.appendChild(oddElement);
+    marketIds.forEach((market, marketIndex) => {
+      if (marketIndex <= 1) {
+        market.last_odds.runners.forEach((runner, runnerIndex) => {
+          const lastOdds = runner.ExchangePrices;
+          updateMarketOdds(marketIndex, runnerIndex, lastOdds);
+        });
+      }
     });
-  }
+  });
+});
+
+function handleOddsData(data) {
+  console.log("Received odds data:", data);
+}
+
+function updateMarketOdds(marketIndex, runnerIndex, odds) {
+  const availableToBack = odds.AvailableToBack;
+  const availableToLay = odds.AvailableToLay;
+
+  const backContainer = document.querySelector(`#back-container`);
+  const layContainer = document.querySelector(`#lay-container`);
+
+  createMarketElement(backContainer, `market${marketIndex}-runner${runnerIndex}-back`);
+  createMarketElement(layContainer, `market${marketIndex}-runner${runnerIndex}-lay`);
+
+  const backElem = document.querySelector(`#market${marketIndex}-runner${runnerIndex}-back`);
+  const layElem = document.querySelector(`#market${marketIndex}-runner${runnerIndex}-lay`);
+
+  updateOddsContainer(backElem, availableToBack, "rgb(141, 210, 240)");
+  updateOddsContainer(layElem, availableToLay, "rgb(255, 175, 178)");
+}
+
+function createMarketElement(container, id) {
+  const div = document.createElement('div');
+  div.id = id;
+  div.classList.add('d-flex', 'justify-content-between');
+  container.appendChild(div);
+}
+
+function updateOddsContainer(container, odds, bgColor) {
+  container.innerHTML = "";
+
+  odds.forEach((odd) => {
+    const price = odd.price;
+    const size = odd.size;
+
+    const oddElement = document.createElement("span");
+    oddElement.classList.add("d-flex", "justify-content-center", "align-items-center", "custom-box", "mb-1");
+    oddElement.style.backgroundColor = bgColor;
+
+    oddElement.innerHTML = `
+      <div class="d-flex flex-column align-items-center" style="width:63px;">
+          <span>${price}</span>
+          <span>${size}K</span>
+      </div>
+    `;
+
+    container.appendChild(oddElement);
+  });
+}
 </script>
+
 
   </body>
 </html>
