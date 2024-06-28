@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            list-style: none;
+            text-decoration: none;
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            width: 250px;
+            background: black;
+            color: white;
+            padding-left: 10px;
+        }
+        ul li a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            line-height: 50px;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        ul li a:hover {
+            text-decoration: none;
+            background-color: #00a826;
+        }
+        ul li a img {
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+            animation: rotate 2s linear infinite;
+        }
+        ul li a.active img {
+            animation: none;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        ul li a.active {
+            background-color: #00a826;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="d-flex align-items-center">
+            <img
+              src="./public/assets/images/logo.webp 512.webp"
+              alt="1obet-logo"
+              width="50"
+              height="50"
+            />
+            <h3>1OBET</h3>
+        </div>
+        <ul>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/dashboard.png"
+                      alt=""
+                    /><span class="m-1">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/tennis.png"
+                      alt=""
+                    /><span class="m-1">Tennis</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/cricket.png"
+                      alt=""
+                    /><span class="ml-1">Cricket</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/soccer.png"
+                      alt=""
+                    /><span class="ml-1">Soccer</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                      alt=""
+                    /><span class="ml-1">Grayhound</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/current-position.png"
+                      alt=""
+                    /><span class="ml-1">Current position</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/horse-race.png"
+                      alt=""
+                    /><span class="ml-1">Horse Race</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/all-sports.png"
+                      alt=""
+                    /><span class="ml-1">Sports Book</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/bet-fair-games.png"
+                      alt=""
+                    /><span class="ml-1">Betfair Games</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                      alt=""
+                    /><span class="ml-1">Evaluation Casino</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                      alt=""
+                    /><span class="ml-1">1obet Casino</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/results.png"
+                      alt=""
+                    /><span class="ml-1">Result</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                      alt=""
+                    /><span class="ml-1">Ezugi Casino</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item">
+                    <img
+                      src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+                      alt=""
+                    /><span class="ml-1">120 British Casino</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
