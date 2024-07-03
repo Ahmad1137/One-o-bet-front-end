@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tennis</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/69c89fc43e.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- dashbaord style -->
+    <style>
+      ul li {
+        list-style: none;
+        text-decoration: none;
+        margin-right: 15px;
+        margin-bottom: 1rem;
+      }
+      ul li a {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        line-height: 40px;
+        font-size: 20px;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        padding-left: 10px;
+        border-radius: 10px;
+      }
+      ul li a:hover {
+        text-decoration: none;
+        background-color: #00a826;
+        color: white;
+      }
+      ul li a img {
+        margin-right: 10px;
+        transition: transform 0.3s ease;
+        animation: rotate 2s linear infinite;
+      }
+      ul li a.active img {
+        animation: none;
+      }
+      ul li a.active img {
+        animation: none;
+      }
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      ul li a.active {
+        background-color: #00a826;
+      }
+      .menu-toggle {
+        font-size: 35px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.5s ease;
+      }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100%;
+        background: black;
+        color: white;
+        padding-left: 10px;
+        transition: all 0.5s ease;
+        overflow-y: auto; /* Add scrolling */
+      }
+      .sidebar.open {
+        left: 0;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: black;
+        color: white;
+        position: fixed;
+        top: 0;
+        width: 100%;
+
+        transition: padding-left 0.5s ease;
+      }
+      .marquee-container {
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+        background-color: black;
+        color: white;
+        padding-top: 50px; /* Adjust for fixed header */
+      }
+      .marquee-text {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 15s linear infinite;
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+      .marquee-container:hover .marquee-text {
+        animation-play-state: paused;
+      }
+      .close-toggle {
+        cursor: pointer;
+
+        margin-left: auto; /* Push to the right */
+      }
+
+      @media screen and (max-width: 790px) {
+        .sidebar {
+          width: 250px;
+        }
+        .sidebar.open ~ #header {
+          padding-left: 250px !important;
+        }
+        .header {
+          font-size: medium;
+        }
+      }
+      @media screen and (max-width: 690) {
+        .content {
+          padding-left: 0 !important;
+        }
+        .sidebar.open ~ #header {
+          padding-left: 0px !important;
+        }
+
+        .sidebar.open ~ .content {
+          padding-left: 0 !important;
+        }
+        .menu-toggle {
+          display: inline-block;
+        }
+      }
+      @media screen and (min-width: 690px) {
+        .close-toggle {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 442px) {
+        .header {
+          padding: 3px;
+        }
+      }
+      @media screen and (max-width: 425px) {
+        .menu-toggle {
+          font-size: small;
+        }
+        .dashbaord {
+          font-size: small;
+        }
+        .bettor {
+          font-size: small;
+        }
+        .header {
+          font-size: small;
+          text-wrap: nowrap;
+        }
+        .marquee-text {
+          font-size: small;
+        }
+      }
+      @media screen and (max-width: 320px) {
+        .menu-toggle {
+          font-size: small;
+        }
+        .dashbaord {
+          font-size: x-small;
+        }
+        .bettor {
+          font-size: x-small;
+        }
+        .header {
+          font-size: x-small;
+          text-wrap: nowrap;
+        }
+        .css-tn9xkt {
+          text-wrap: nowrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header" id="header">
+      <i class="fa fa-bars menu-toggle ml-1" id="menuToggle"></i>
+      <!-- <h5 class="ml-2 mb-0 dashbaord">Dashboard</h5> -->
+      <div class="mx-auto">
+        <span class="navbar-brand mb-0 h1 text-center bettor">Bettor</span>
+      </div>
+      <div class="ml-auto">
+        <span class="navbar-text">B:2378</span>
+        <span class="navbar-text ml-3 text-success">L:0</span>
+        <span class="navbar-text ml-3">Username</span>
+      </div>
+    </div>
+    <div class="marquee-container">
+      <div class="marquee-text">
+        Welcome to 1obet.com - Announcement - All casino Profit Loss will be 1
+        to 2 Ratio - Her casino may Jeet Har 1 ka 2 ho ge - Welcome to Exchange
+        - Zero commissions on chota bara, kalli jotta, fancies
+      </div>
+    </div>
+    <div class="sidebar" id="sidebar">
+      <div class="d-flex align-items-center mt-3">
+        <img
+          src="./public/assets/images/logo.webp 512.webp"
+          alt="1obet-logo"
+          width="50"
+          height="50"
+        />
+        <h3>1OBET</h3>
+        <i class="fa fa-times close-toggle ml-5" id="closeToggle"></i>
+      </div>
+      <ul class="p-0">
+        <li>
+          <a href="dashboard_.html" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/dashboard.png"
+              alt=""
+            /><span class="m-1">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="tennis.html" class="menu-item active">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/tennis.png"
+              alt=""
+            /><span class="m-1">Tennis</span>
+          </a>
+        </li>
+        <li>
+          <a href="cricket.html" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/cricket.png"
+              alt=""
+            /><span class="ml-1">Cricket</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/soccer.png"
+              alt=""
+            /><span class="ml-1">Soccer</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+              alt=""
+            /><span class="ml-1">Grayhound</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/current-position.png"
+              alt=""
+            /><span class="ml-1">Current position</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/horse-race.png"
+              alt=""
+            /><span class="ml-1">Horse Race</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/all-sports.png"
+              alt=""
+            /><span class="ml-1">Sports Book</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/bet-fair-games.png"
+              alt=""
+            /><span class="ml-1">Betfair Games</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+              alt=""
+            /><span class="ml-1">Evaluation Casino</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+              alt=""
+            /><span class="ml-1">1obet Casino</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/results.png"
+              alt=""
+            /><span class="ml-1">Result</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+              alt=""
+            /><span class="ml-1">Ezugi Casino</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="menu-item">
+            <img
+              src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
+              alt=""
+            /><span class="ml-1">120 British Casino</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      const closeToggle = document.getElementById("closeToggle");
+      const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.getElementById("sidebar");
+      const header = document.getElementById("header");
+      const content = document.querySelector(".content");
+
+      menuToggle.addEventListener("click", function () {
+        sidebar.classList.toggle("open");
+        // Adjust the position of the toggle button and header padding
+        if (sidebar.classList.contains("open")) {
+          if (window.innerWidth <= 690) {
+            header.style.paddingLeft = "0";
+            content.style.paddingLeft = "0";
+          } else if (window.innerWidth <= 790) {
+            header.style.paddingLeft = "250px";
+            content.style.paddingLeft = "250px";
+          } else {
+            header.style.paddingLeft = "308px";
+            content.style.paddingLeft = "310px";
+          }
+        } else {
+          header.style.paddingLeft = "0";
+          content.style.paddingLeft = "0";
+        }
+      });
+      closeToggle.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+      });
+      // window.addEventListener("resize", function () {
+      //   if (sidebar.classList.contains("open")) {
+      //     if (window.innerWidth <= 790) {
+      //       header.style.paddingLeft = "250px";
+      //       content.style.paddingLeft = "250px";
+      //     } else {
+      //       header.style.paddingLeft = "308px";
+      //       content.style.paddingLeft = "310px";
+      //     }
+      //   }
+      // });
+
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          document.querySelectorAll(".menu-item").forEach((i) => {
+            i.classList.remove("active");
+          });
+          this.classList.add("active");
+        });
+      });
+    </script>
+    <script>
+      const wrapper = document.querySelector(".wrapper");
+      const carousel = document.querySelector(".carousel");
+      const firstCardWidth = carousel.querySelector(".card").offsetWidth;
+      const arrowBtns = document.querySelectorAll(".wrapper i");
+      const carouselChildrens = [...carousel.children];
+
+      let isDragging = false,
+        isAutoPlay = true,
+        startX,
+        startScrollLeft,
+        timeoutId;
+
+      // Get the number of cards that can fit in the carousel at once
+      let cardPerView = Math.round(carousel.offsetWidth / firstCardWidth);
+
+      // Insert copies of the last few cards to beginning of carousel for infinite scrolling
+      carouselChildrens
+        .slice(-cardPerView)
+        .reverse()
+        .forEach((card) => {
+          carousel.insertAdjacentHTML("afterbegin", card.outerHTML);
+        });
+
+      // Insert copies of the first few cards to end of carousel for infinite scrolling
+      carouselChildrens.slice(0, cardPerView).forEach((card) => {
+        carousel.insertAdjacentHTML("beforeend", card.outerHTML);
+      });
+
+      // Scroll the carousel at appropriate postition to hide first few duplicate cards on Firefox
+      carousel.classList.add("no-transition");
+      carousel.scrollLeft = carousel.offsetWidth;
+      carousel.classList.remove("no-transition");
+
+      // Add event listeners for the arrow buttons to scroll the carousel left and right
+      arrowBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          carousel.scrollLeft +=
+            btn.id == "left" ? -firstCardWidth : firstCardWidth;
+        });
+      });
+
+      const dragStart = (e) => {
+        isDragging = true;
+        carousel.classList.add("dragging");
+        // Records the initial cursor and scroll position of the carousel
+        startX = e.pageX;
+        startScrollLeft = carousel.scrollLeft;
+      };
+
+      const dragging = (e) => {
+        if (!isDragging) return; // if isDragging is false return from here
+        // Updates the scroll position of the carousel based on the cursor movement
+        carousel.scrollLeft = startScrollLeft - (e.pageX - startX);
+      };
+
+      const dragStop = () => {
+        isDragging = false;
+        carousel.classList.remove("dragging");
+      };
+
+      const infiniteScroll = () => {
+        // If the carousel is at the beginning, scroll to the end
+        if (carousel.scrollLeft === 0) {
+          carousel.classList.add("no-transition");
+          carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.offsetWidth;
+          carousel.classList.remove("no-transition");
+        }
+        // If the carousel is at the end, scroll to the beginning
+        else if (
+          Math.ceil(carousel.scrollLeft) ===
+          carousel.scrollWidth - carousel.offsetWidth
+        ) {
+          carousel.classList.add("no-transition");
+          carousel.scrollLeft = carousel.offsetWidth;
+          carousel.classList.remove("no-transition");
+        }
+
+        // Clear existing timeout & start autoplay if mouse is not hovering over carousel
+        clearTimeout(timeoutId);
+        if (!wrapper.matches(":hover")) autoPlay();
+      };
+
+      const autoPlay = () => {
+        if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
+        // Autoplay the carousel after every 2500 ms
+        timeoutId = setTimeout(
+          () => (carousel.scrollLeft += firstCardWidth),
+          2500
+        );
+      };
+      autoPlay();
+
+      carousel.addEventListener("mousedown", dragStart);
+      carousel.addEventListener("mousemove", dragging);
+      document.addEventListener("mouseup", dragStop);
+      carousel.addEventListener("scroll", infiniteScroll);
+      wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
+      wrapper.addEventListener("mouseleave", autoPlay);
+    </script>
+  </body>
+</html>
