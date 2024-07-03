@@ -14,6 +14,57 @@
       crossorigin="anonymous"
     ></script>
     <style>
+      .footer .footerLinks {
+        background-color: rgb(34, 42, 60);
+        min-width: 100%;
+        opacity: 0.8;
+        text-align: center;
+      }
+      .footer {
+        min-width: 100%;
+      }
+      footer {
+        height: 100px;
+      }
+      .footer_img {
+        width: 100%;
+        display: flex;
+        opacity: 0.7;
+        -webkit-box-pack: center;
+        justify-content: center;
+        background-color: rgb(34, 42, 60);
+      }
+      .footer_img .footerLogos {
+        height: auto;
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        -webkit-box-pack: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .footer_img .footerLogos .loginImageOne {
+        min-width: 120px;
+        height: auto;
+        cursor: pointer;
+      }
+      .footer_img .footerLogos .loginImageTwo {
+        min-width: auto;
+        height: 40px;
+        margin: auto;
+        cursor: pointer;
+      }
+      .loginfooterimg {
+        width: 120px;
+        height: auto;
+        cursor: pointer;
+      }
+      .loginfooterimgto {
+        margin: auto;
+        height: 35px;
+      }
+    </style>
+    <style>
       * {
         margin: 0;
         padding: 0;
@@ -130,6 +181,7 @@
         display: flex;
         position: relative;
       }
+
       .css-nu8l0g {
         padding-left: 1.25rem;
         padding-right: 1.25rem;
@@ -530,17 +582,106 @@
         }
       }
     </style>
+    <style>
+      @media screen and (max-width: 790px) {
+        .sidebar {
+          width: 250px;
+        }
+        .sidebar.open ~ #header {
+          padding-left: 250px !important;
+        }
+        .header {
+          font-size: medium;
+        }
+        .hidden-head {
+          display: none;
+        }
+        .css-1xhj18k {
+          display: none;
+        }
+        .css-tn9xkt {
+          margin-left: 10px;
+        }
+      }
+      .close-toggle {
+        cursor: pointer;
+        /* Initially hidden */
+        margin-left: auto; /* Push to the right */
+      }
+
+      @media screen and (max-width: 690) {
+        .content {
+          padding-left: 0 !important;
+        }
+        .sidebar.open ~ #header {
+          padding-left: 0px !important;
+        }
+
+        .sidebar.open ~ .content {
+          padding-left: 0 !important;
+        }
+        .menu-toggle {
+          display: inline-block;
+        }
+      }
+      @media screen and (min-width: 690px) {
+        .close-toggle {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 442px) {
+        .header {
+          padding: 3px;
+        }
+      }
+      @media screen and (max-width: 425px) {
+        .menu-toggle {
+          font-size: small;
+        }
+        .dashbaord {
+          font-size: small;
+        }
+        .bettor {
+          font-size: small;
+        }
+        .header {
+          font-size: small;
+          text-wrap: nowrap;
+        }
+        .marquee-text {
+          font-size: small;
+        }
+      }
+      @media screen and (max-width: 320px) {
+        .menu-toggle {
+          font-size: small;
+        }
+        .dashbaord {
+          font-size: x-small;
+        }
+        .bettor {
+          font-size: x-small;
+        }
+        .header {
+          font-size: x-small;
+          text-wrap: nowrap;
+        }
+        .MuiStack-root p {
+          font-size: small;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="header" id="header">
-      <i class="fa fa-bars menu-toggle" id="menuToggle"></i>
-      <h5 class="ml-2">Dashboard</h5>
+      <i class="fa fa-bars menu-toggle ml-1" id="menuToggle"></i>
+      <h5 class="ml-2 mb-0 dashbaord">Dashboard</h5>
       <div class="mx-auto">
-        <span class="navbar-brand mb-0 h1 text-center">Bettor</span>
+        <span class="navbar-brand mb-0 h1 text-center bettor">Bettor</span>
       </div>
       <div class="ml-auto">
-        <span class="navbar-text">1-B:2378</span>
-        <span class="navbar-text ml-3">2-L:0</span>
+        <span class="navbar-text">B:2378</span>
+        <span class="navbar-text ml-3 text-success">L:0</span>
         <span class="navbar-text ml-3">Username</span>
       </div>
     </div>
@@ -560,13 +701,13 @@
               Credit: 0
             </p>
             <p class="MuiTypography-root MuiTypography-body1 css-tn9xkt">
-              Balance: 2,734
+              Balance: 2,844.8
             </p>
             <p class="MuiTypography-root MuiTypography-body1 css-tn9xkt">
-              Liable: -100
+              Liable: 0
             </p>
             <p class="MuiTypography-root MuiTypography-body1 css-tn9xkt">
-              Active Bet: 1
+              Active Bet: 0
             </p>
           </div>
         </div>
@@ -646,9 +787,7 @@
                 d="M400 16c-21.335 9.73-58.244 17.34-73.086 48.232-22.36 1.948-72.753 10.673-122.22 40.25-58.098 34.74-116.017 97.417-131.776 213.702l-.48 3.537-2.774 2.25c-30.87 25.002-40.657 38.937-44.416 61.153-3.536 20.9-.72 51.46-.363 101.877H328.36c3.455-16.892 10.44-29.245 12.472-41.568 2.337-14.176.19-29.938-20.812-58.547-43.078-58.683-46.853-129.458-12.916-171.28-8.654-2.765-15.09-6.887-19.458-12.546-6.115-7.924-7.4-17.006-8.57-25.884l17.848-2.352c1.112 8.446 2.38 13.88 4.97 17.237 2.59 3.356 7.31 6.472 19.55 8.46l-.022.128.172-.17 5.998 9.424c19.957 31.358 42.84 51.292 73.332 54.44l6.51.672 1.367 6.4c2.74 12.828 8.626 19.095 15.116 22.238 6.49 3.143 14.225 2.944 20.47.205 9.316-4.086 14.518-11.35 16.7-22.712 2.122-11.05.546-25.834-5.137-42.106-33.538-38.248-44.475-87.277-63.903-128.772-6.055-9.947-12.448-18.518-20.385-24.856C376.808 55.126 386.456 34.852 400 16zM214.068 34.97C179.55 35.06 146.075 43.06 96 58.58c31.146 9.92 70.397 18.9 86.037 39.01 4.463-3.017 8.94-5.88 13.418-8.56 40.51-24.22 80.387-35.286 108.23-40.04-35.854-9.477-63.047-14.094-89.617-14.023zM157.16 96.712c-1.13-.01-2.265-.01-3.402.004-30.353.37-63.1 9.745-96.647 31.283 27.186 3.672 54.67 3.724 72.58 15.398 15.9-17.92 33.144-32.634 50.677-44.668-7.548-1.244-15.292-1.938-23.207-2.017zM368 128a13.214 13.215 0 0 1 13.213 13.215A13.214 13.215 0 0 1 368 154.432a13.214 13.215 0 0 1-13.213-13.217A13.214 13.215 0 0 1 368 128zm-238.906 16.068c-36.395 1.495-68.903 6.53-104.76 24.766 33.236 7.095 50.913 13.507 65.025 33.83 11.522-22.53 25.045-41.93 39.734-58.596zM74.518 201.46C53.53 201.65 36.614 213.14 16 224c27.854 0 46.067 3.862 58.71 12.055 4.33-11.652 9.16-22.615 14.41-32.924-5.12-1.19-9.963-1.71-14.602-1.67zm-.623 36.82c-17.933 5.845-35.452 7.15-54.23 22.284 17.62 4.638 34.79 9.596 41.398 22.034 3.496-15.77 7.814-30.523 12.832-44.32zm370.142 8.57c1.617-.035 3.222.044 4.783.187l-1.64 17.926c-3.928-.36-5.513.416-5.57.465-.058.048-1.035.656-.635 5.886l-17.95 1.372c-.638-8.35 1.297-16.207 6.955-20.997 4.245-3.593 9.206-4.735 14.057-4.84zM52.215 290.723c-10.352.13-23.76 5.646-34.656 12.334 12.173 6.83 12.357 23.472 8.938 37.668 7.3-9.105 16.855-18.323 29.158-28.48 1.016-7.043 2.19-13.9 3.506-20.585-2.082-.67-4.42-.97-6.947-.937z"
               ></path>
             </svg>
-            <p class="MuiTypography-root MuiTypography-body1 css-tn9xkt">
-              Horse Race
-            </p>
+            <p class="MuiTypography-root MuiTypography-body1">Horse Race</p>
           </div>
         </div>
         <div class="MuiBox-root css-1tv6lwp">
@@ -917,21 +1056,21 @@
                 Matched
               </th>
               <th
-                class="text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
                 scope="col"
                 width="126px"
               >
                 1
               </th>
               <th
-                class="text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
                 scope="col"
                 width="126px"
               >
                 X
               </th>
               <th
-                class="text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
                 scope="col"
                 width="126px"
               >
@@ -2848,7 +2987,201 @@
           </tbody>
         </table>
       </div>
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-136bwoc"
+      >
+        <table class="MuiTable-root css-rxit2l">
+          <thead class="MuiTableHead-root css-disv23">
+            <tr class="MuiTableRow-root MuiTableRow-head css-e03dsj">
+              <th
+                class="text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="60px"
+              >
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-17l795x"
+                  aria-hidden="true"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M433.2 17.99L159.8 291.4l60.8 60.8-6.3 6.3L494 78.79c0-24.32-36.5-60.8-60.8-60.8zM161.5 64.03a32 32 0 0 0-7.8.59c3.9 21.25 13.8 38.48 30.3 52.48a32 32 0 0 0 3.7-37.13 32 32 0 0 0-26.2-15.94zm-24.1 9.35a32 32 0 0 0-5.1 38.62 32 32 0 0 0 36 14.9c-15.5-14.7-25.9-32.79-30.9-53.52zm26.4 247.22C126.3 378.1 60.46 427.7 19.06 479.5c-4.82 5.9 7.6 18.2 13.53 13.5C84.32 451.6 133.9 385.7 191.4 348.2z"
+                  ></path>
+                </svg>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-199x37d"
+                scope="col"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1sfdxp7"
+                >
+                  cricket
+                </h6>
+              </th>
+              <th
+                class="text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="90px"
+              >
+                Matched
+              </th>
+              <th
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="126px"
+              >
+                1
+              </th>
+              <th
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="126px"
+              >
+                X
+              </th>
+              <th
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="126px"
+              >
+                2
+              </th>
+            </tr>
+          </thead>
+          <tbody class="MuiTableBody-root css-12dfzmm"></tbody>
+        </table>
+      </div>
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-136bwoc"
+      >
+        <table class="MuiTable-root css-rxit2l">
+          <thead class="MuiTableHead-root css-disv23">
+            <tr class="MuiTableRow-root MuiTableRow-head css-e03dsj">
+              <th
+                class="text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="60px"
+              >
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-17l795x"
+                  aria-hidden="true"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M433.2 17.99L159.8 291.4l60.8 60.8-6.3 6.3L494 78.79c0-24.32-36.5-60.8-60.8-60.8zM161.5 64.03a32 32 0 0 0-7.8.59c3.9 21.25 13.8 38.48 30.3 52.48a32 32 0 0 0 3.7-37.13 32 32 0 0 0-26.2-15.94zm-24.1 9.35a32 32 0 0 0-5.1 38.62 32 32 0 0 0 36 14.9c-15.5-14.7-25.9-32.79-30.9-53.52zm26.4 247.22C126.3 378.1 60.46 427.7 19.06 479.5c-4.82 5.9 7.6 18.2 13.53 13.5C84.32 451.6 133.9 385.7 191.4 348.2z"
+                  ></path>
+                </svg>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-199x37d"
+                scope="col"
+              >
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle2 css-1sfdxp7"
+                >
+                  cricket
+                </h6>
+              </th>
+              <th
+                class="text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="90px"
+              >
+                Matched
+              </th>
+              <th
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="126px"
+              >
+                1
+              </th>
+              <th
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="126px"
+              >
+                X
+              </th>
+              <th
+                class="hidden-head text-center MuiTableCell-root MuiTableCell-head MuiTableCell-alignCenter MuiTableCell-sizeMedium css-d861ke"
+                scope="col"
+                width="126px"
+              >
+                2
+              </th>
+            </tr>
+          </thead>
+          <tbody class="MuiTableBody-root css-12dfzmm"></tbody>
+        </table>
+      </div>
+      <footer>
+        <div class="margin-top footer">
+          <div class="row" style="margin: auto">
+            <div class="col" style="background-color: rgb(34, 42, 60)">
+              <div class="footerLinks">
+                <div>
+                  <a href="#/privacyPolicy" target="_blank"> PrivacyPolicy</a>
+                  <a href="#/terms-and-conditions" target="_blank"
+                    >- Terms and Conditions</a
+                  >
+                  <a href="#/rules-regulation" target="_blank"
+                    >- Rules and Regulations</a
+                  >
+                  <a href="#/KYC" target="_blank">- KYC</a>
+                  <a href="#/responsible-game" target="_blank"
+                    >- Responsible Gaming</a
+                  >
+                  <a href="#/about-us" target="_blank">- About Us</a>
+                  <a href="#/self-exclusion-policy" target="_blank"
+                    >- SelfexclusionPolicy</a
+                  >
+                  <a href="#/under-age-policy" target="_blank"
+                    >- UnderagePolicy</a
+                  >
+                  <a href="#/dispute" target="_blank">- Dispute Resolution</a>
+                  <a href="#/aml" target="_blank">- AML</a>
+                  <a href="#/fairness-and-rng" target="_blank"
+                    >- Fairness &amp; RNG</a
+                  >
+                  <a href="#/A-P-B" target="_blank">- Accounts &amp; Bonuses</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer_img">
+          <div class="row justify-content-center">
+            <div class="col-auto">
+              <img
+                src="./public/assets/images/login-footer-image2.webp"
+                alt="BellIconDark Img"
+                class="loginfooterimg"
+              />
+
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAA/CAYAAAAR4CYZAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAABLASURBVHgB7V0JuB01FT4X2WStFpCdh8oiCBSUVYGyurFUBGRvUQQBoQU+EERoQQVFpQ9EZe9DQECBFvADBaWPTZDtsajsvFcosnWjUJbSEv+/yfRN500yc+9k7tb833e+uTfJJGcyyZmTk5NEJCAgICAgICAgICAgICAgICAgICAgIKBMKKXGg3pjNBE0DtSRSNcBGhtL1wMaCRpk4keY8M7EfdE9oyzlDkrhIaJxJu3IFB55z/BYfiMtefSa+KGJ8B6Tz9jks1r4T9433MSPMuGjU+prHq8SENBuMJ2AeMz8nm7+T486FK5DYuF9iXS9pvMPit03KJZ/rwmfGAvrMGHdFh4i6jTxY2JlTTTpIoyypJlPJn5ojL+JKc8wxFI/XSbNBKUF6sTYM41JPOPQ2H09JqxDAgLaDaq/0w6NhXWasKjjLtBRTNigWOcYk5ZXrLNGiGsn8U4/gIcEj2NSyo/y7rWlSeQRpe+25N2rYgIvFt+VUj/D4nnF8u5JPN84CagbFpGARuMxc13edJgOUF+lUhkTJcDvGbgcav6ONNebzHV44hqFj0iET5AFMcx0uogGdOQUHjsS4Zsk8hjiyEPMM3WbfFxphxgBMQy/9zRh3SaPbvObacbiymFLH+gMCQhoR8S+9qOijqH6NYzhWV9PE6fM7/nDFfO/V/UPZZQpqyP+dU7wkMRQEx9pBeMMj6Sxia/+GEseY0x8qsZh4iKtYoQjLgkOc4bE0nWo/qEPMVwCAtoVjk473sQPMf97U+6NhMD0lPxGm+u4RPhIcx2Vcs8wk2dE0dDGJhR6Vb8dJkrTacnDJTh6TdzQlLiuFN5GKC0kkvaciIfHJKDuCEOVxoBq9aGGNoX6/U0G4spO0Adih5k/c2A6zHjz94pYPtGwZIy5npcIj2ZdksMUYgbK64vRjET8BMNfVN4EpqsyD4k/g9JDiw7RQ7FusSOeb5cJG2QoQp+59khAQDtDZRgmTZohsa8yrz2qXy3vSXx1B8U1glh4Ryy8x8LDdJU+lbqA4dOU0RvnO5ZmQB6m7KFxvgzFZ5CyZlWiadiJsbJ7E2mdw7qAcrGoBNQTj5ur9ctMrQOdYQfRWgQ72CdAk0RrE53xrzp/Iy01grUkplXwSx0LP8/Cgw19oo2PfbEyqHlQAxoRi+u23D/DUHdK+OPJZ7CUnQyjBtWZkh/ThqFKQEBAQEBAQEBAQEBAQEBAQEDrAsa3q0Hvgd5N0HuW8FkJisL3E89Ang+A5qbQbNAaEmAF6ucAS92RzpESgHzXBZ0Ouh/0unlPNh4+MsTf70uTATx9I8ZjnFfSxdJANMusyuKgJaU4ynieRST4uxSBre4q4hlKO7qdCVpWqgN5+Zg0HyoysJ6i/w1tk2E6thi8N/6A6gGBsRQuN4K+IgF1QfiSBrQDLpPiQkNJ80HVGFc6gsYR0NKgHQCXb1dzS+x3JSUsIAeC4AhodZwo7iHjTBDd0v8KekVaa3jZtAItCI6AlgW0jU/hsrkjyWTQQZVK5S5pTXCmZ4qkC7v3pIFoFsERjIwBtWAj0FKWuHdA+0Jo3C+ti27QZy1xH0gDUargwBeBU6zLSbZg+Lj4wTLmK+SCQmN6Q/wgjI0bi0874m5vcaHBBYYf4fKWNCHK1jiWBt0i+svgMkQtJn5wPmhsSnhUJnn4KehnEtAO+KQj7l8SUBpKFRyQmFOV3iKuG7SSlI/FxC2E/g46VwKaAT6Gpy6nrXcloDSU7scB4fEULnuB3pbG4kXQweDHp1Ep2GaaF2EYWSLqYhxFZ70Pmsf+ojebaYRB9mXQduDjNSkJeD4+1/agHUEbiDZquWw3FKTcP5Q8PQ96EPQEeHxJ/PE0GJdtQJuC1hWt9ZGWybiV4+pphrdnQA+D/gneZmaUxzpYTfo77cqO5Msi/ZriBu1RLyfyXzUWv7zj3uVy5P8R8p9si8T91Gi2Am0JWtvQiqKHSLaPBjUd1h2nfvle/w16EuU8LVVC6R3XLkkpi/V7I/L8Yco9fL93S3o/OxP3/CGWloblg0HbgjaUflf92aJnc14F0U50D+hR3OtfGIOJSo40R5uFOvXEW6BNpEbg3gct+XKh0Zqgj4GOAE1SxZ+NeT4KOha0tNQA3Leo4edOpRd4+QIXE14D2sxR9lqgOWrBRWQ2xBds2WhKIv9tq8h/biJtGj1keY7tQJeB3lZ+EL3X45Xu2Hnf5dcdeV5iuWcNU14ajo2l4077s1R+/rnY86viE8iQ0v0ulaODIs25qn74EPQ1KQDlFhzcH5TPXYYwfIm8qxwCOcbrzkoLsDLBzshONTilfArSucofpiXyZ4f2WdePJPJfAXSjKvfj9prSnTbPh9a74AANVnrlcC1gvbD/VgrbOJRWH38H2g50M/5nqcH09LtDygfVqlOgXt0m5eEq0c9dhq2DS/Y5I/WjPIlR74fjcjsoSz0vCqrv3wFdbt59PVGa3QLPwuHH30Dccb5M2xXdBWig/73UH3x3FDhbSW1gvXAF8gGFBIeRmiczIxPERkuJbR3boiPPxeVA0LNSHtjAuFnveVIeWHcbSrngix6N+tzXlQjxPO2Mz1pPY+3uoJOkXNTTwHkaaDOpD/ieOJw8VsqBrd4o8IdJMZD304p+MU4Rvf9BvMHuAroUlbKPbQYD4W8ifmf85CHFnxH/+DPoOJTzodQXfGEcl79lrvRenGOuBOubGhmNUPzy0NBGA5Wrw3N6+eeorzvxPFMGFKjUeqJXhy6ZwReNsVMNzUjwJYYn5sHjFzgOX0HcU9vk+SSUfy34elHKQdmCIzoVj9rdYTnTs87eBL1hfs8CsZ3xPS4hus6ovbAO+X5d75Zq/y2ov16pDz6fEkZDKHfRp5GYQ0M6bPLdUwngDvtJ5YIG3xNqFhxGNT5D0iuGKxYpwa1qNq3lHMOJ9vFYRfyBjj9Hug4HqhJ5vuIUFFcboiY13WhWVhg1nw2LFvtjQDs4yqI1f2/QhSlxPwYNttxH4cCjBbhbFI8mmAq+5kgGlLa2rw7ayfD2OUtSzmocAYqs+1NM+qixbSHaap+GO6T/4Ch2yLRnTwr+F0A/kP4NbnYVrfmkgR+Pu2Sg8ImXE3kQc9bJNcSeZXjljMQToDez6lFpr2l6tlK7PkoWPEwqAjXKE0Q/U73BGTK2p8tBLySfR2njPB03yftBogUMP1Cj0z5guYBMt1YLnt1pM6SckiMvGgDzWnez8ILyvJ0f8nsoo0waMbeUAsD9i4BOVW6j3L0p962s9KxRGmggozGs0M5WhrdxDr6eUhZbB8IPdNz3SykIU2c2HFVFPtxu8ELQq2rgO+AHruZZOZP/3spusOT7q1juq9U4Oke58TRoY8kJpD0BtLkUATJYEfScygcKl50z8quATlPFLdkfgLYWz1BuwcEXtL14APJZUrk7KL1wV0rc42pYnD7z4uCn9Glu0yzlUOivYbnPJTh+JQWhPAmOWH5s298F0cg/w+RzuhSE0u/2cQufbPcbWu4rQ3Bwir6YEJAqPUdRIB2abhb7ir0kqJ5dgfs2sCUwTiW/EK0G1Tqm5X2HNGBR022+lmwjHy6hZiO1qcAcb66dCNtC7LjYLJIqDDPsu8USzTaxrrQBaHsDXQbaA3/XET08vEIKwrzbB2zRoK0dcb5xIfh5SAoit+BQeszGzVCqncqhp98duN8qbPAgHD8dL9pGUC0oNEYij+uk/hgvHmG8JB+0RctAwbGOJa1y5FMrnreEk6+1pM1ghMgNoEniB6844tazhPs2DjO/S8UDchlHlR6DscDtpDZQeNyEfLbFi5iWlgDh9NL7nmj/hbzqPyuCbrS/kfqDZf9H/INnoW5jiUt6HdqMotQ0/id+4TI2D5Y2hdL2GxrvWfc0GNKIGtcEot90NadmMc/dnO05kZVr0d1yUh9wicOT4gF5Z1VOlX5fjVrB4cqfQFabB1U6vCguiKNHX4dkgxrKGdI4+NrXIw7Xlym57b/N8Emh5pzV8YzFpU2A9sfhNYcqHD6wrVKbYj/JO2xg3dNu8RyudD68Eu26Rxq8Y5fBS77Wm2QKDqWdi+jk5WO8tRPyOwvMu6ZpaYTbBz/vE3uD5MPzy3x8KQtv8qGszvmOFAff1X6oRx95RdhU2hhKTz+OANEpi0PAWtt7dEbL+oYOQt6N/LjFkTkVnxdOwaH0gqaLRKtovnAy8n0WHb7LlgBxDxvhwdW0aS+QtoC9OQ6V9oMPQciGe6E0Hi2xtB1tjUORK0Fc2ezbIElfHXr1PiptBKtxFJVJS/n1oj0cfWKevQT57+1MVKlw9obSPykl6XyyX4neigHVo2X3vkA7pBMb2zmd3cpy2acgLzwF6gHe3lOq4FB6Xv5WGWjF9wVWZBfK2cWVCMLhAlxGS/8D0/A0vNX3kgxoKpwl9unQNCgHLTQYMFQxMyh/lHLWkMTB4c9FKG+HjCmvs0WPr78FOhlpb5WAZkM9F9d5g9E2aPR38U+BQHd9bjv5X9FrfZKCInKBZ5umfYTaBX1sstaqtCzSbBz8yn9Z6gNqNFfRAOuYpqW32/fx8w78vkQWblTTCJWU12hVxv9WAZcKuHYRo5v/YWh3z0iVUNprl5oM2y5PmvO1IXdTYAHBgYc9TvSilnqCQuoClM0XlDrXzU2PRS/UWhjgw02cdqEvSP3wsrQmuHjPJlxpeN8Nba+m4wmM1y5nBrltJrUVGquXlMbC24dkvuDAw3Eo8GtpDPYDcWekE7NWlTYR+BKWEv8YJH4wqdZG7xHNrqa7HNdu9Vh/XFU7TKrfC6Np62/e1w0ddjdcrpHGMcpyuRz7bGktrC7+sZojLumXMduSju/V5xR6u8JVR1PFE4yv0b3SRljErCHhNmaNHoNR++HyXb8bopYHCruNxD/Wd8QlPVVtfiwUHGUItWqxUM00ZKChRzb6BjsrDTcPZKTjIhwfnYQ7HT2SEj7PTdf83h/C4/4mULPzYA/w2unLexV5deDyRVu0DFxo5vJloWXf20I38Mb1RnR5f66KVbeuYWfW3rT1QD3P+mm0fcMrFkUjyDwOEY1mJC6dUhw9KG8faR9w0R8F77VSEKhjanzcSct2FgtV5+TZHI+IHdx567fiD1y9zI1qnzXGPu6I9UjGTmvUkGyzO/WauXPBJThWFb/wvldMI5HXgu9L5WzFOW0Xz6w/Ticfoao4xiAJ3Ms9HimYD3ckSzsQidvvvW9JvyXyPbsIX4Y3nhtzKH4eLdpxjzMRx5iyn0Ecn38Jy+3UiGz7vm6A+3aVxsLlP8R1VYUdIJXeqIp1t7vUD6X3s7yrY9vSicUT2JloIzocDYTrHe4SPT35Njp66rjWLKii/wCdhbg/K7UW17EGHBpckAzkPibI6wrR+36mgYsTd0Qa7ivJqUGezDXLbCwjFt7YJjhbxPUbXN4fnfSVbCtsE1xqvrLtOUWv9KWWlLZNHe+fgPLOwbULNDnPfqiewVPWWGZaP6Dz1j3gj9OodDqkkJnp2gDb1B01Ri6Tp/c1648TD0OlzfpQI45jbEewUWxmiJ38ddAkszqVvinRWJ9ChkKDjZLLtZeTfA2KQ5J/WOI4HGHntk0Nb2GIPPBIR+6rOcPwmZylIT9s+JzZWUPchzpHuN4WQUGAsrhzmG1/S5bFXc+OBHHv0unSb+uK6iXSdrnbmpdNaGLoA3H5u20zZtbDTwyPHCpy/1Ha3rh5cdx+E73X6INAwzTtQY0QFnUpMwiOYkgbv3P4sor427mdDfUgm0ES4U+iMXOXbDrIud4nG/dq4p7urRbcyOiyjDTki0cP2BZLRppL1tGIk8QzzP4v1Cg6JfuIipXFfRbuQoXST6tvY1Bo0LBc5jQbbQS7ooFnHV7VJXoxYD1VfRo+96pknF1jDtHmEQBF66mUqV3wd77oDabKxmxpIwTBkQ3lCOfaGc4SeTth3oDaRRdoCzTszClVMx1M57lDpIQvcwIsa6Jo3nKdxod03KmNMzIzpXaU6RNC4+91JZbBIeK54hcNtZnUe1alFcG9O2nk40lXLxuKfit0Co7h6ePCL34RvwDWMcfRNHZujHwPNWt0coHCA0TvXy7c4vR5n/h9bzSo3g3aCeXsWO0mvkjPIQHPJ7lZmqw98cRBEJc9cNkFfWV88cd8+kTPqEyW6qFqjCsdeW0c/LLcEPufl+lK4p7HpPXAxpRaT9HshJkmPRPjZe70xClGGiN53B7tCTa/jOmG2AE580AD6NPI63UpAHP/+eCFO7fRmexLos+47RB9NGEeRyQOeWhbmWz44wa3dBJ8vsjMB+7tw2VP8Ea+OJvEhXiRITELaUKUK6rZ0dnOkm2y6pP8wN948PYX0cKXM0mbGf64fihvX6HBmbNXPHXuHtDt9HUxG2O9YNKolOdIA9+BbXd52z3KlJOmkbwmnvB/6LU9a7bCcXEAAAAASUVORK5CYII="
+                alt="BellIconDark Img"
+                class="loginfooterimgto"
+              />
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
+
     <!-- end boady main content -->
     <div class="sidebar" id="sidebar">
       <div class="d-flex align-items-center mt-3">
@@ -2859,6 +3192,7 @@
           height="50"
         />
         <h3>1OBET</h3>
+        <i class="fa fa-times close-toggle ml-5" id="closeToggle"></i>
       </div>
       <ul>
         <li>
@@ -2878,7 +3212,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="menu-item">
+          <a href="cricket.html" class="menu-item">
             <img
               src="./public/assets/side-menu-icons/light-icons/cricket.png"
               alt=""
@@ -2977,6 +3311,7 @@
     </div>
 
     <script>
+      const closeToggle = document.getElementById("closeToggle");
       const menuToggle = document.getElementById("menuToggle");
       const sidebar = document.getElementById("sidebar");
       const header = document.getElementById("header");
@@ -2986,13 +3321,35 @@
         sidebar.classList.toggle("open");
         // Adjust the position of the toggle button and header padding
         if (sidebar.classList.contains("open")) {
-          header.style.paddingLeft = "308px";
-          content.style.paddingLeft = "310px";
+          if (window.innerWidth <= 690) {
+            header.style.paddingLeft = "0";
+            content.style.paddingLeft = "0";
+          } else if (window.innerWidth <= 790) {
+            header.style.paddingLeft = "250px";
+            content.style.paddingLeft = "250px";
+          } else {
+            header.style.paddingLeft = "308px";
+            content.style.paddingLeft = "310px";
+          }
         } else {
           header.style.paddingLeft = "0";
           content.style.paddingLeft = "0";
         }
       });
+      closeToggle.addEventListener("click", function () {
+        sidebar.classList.remove("open");
+      });
+      // window.addEventListener("resize", function () {
+      //   if (sidebar.classList.contains("open")) {
+      //     if (window.innerWidth <= 790) {
+      //       header.style.paddingLeft = "250px";
+      //       content.style.paddingLeft = "250px";
+      //     } else {
+      //       header.style.paddingLeft = "308px";
+      //       content.style.paddingLeft = "310px";
+      //     }
+      //   }
+      // });
 
       document.querySelectorAll(".menu-item").forEach((item) => {
         item.addEventListener("click", function () {
