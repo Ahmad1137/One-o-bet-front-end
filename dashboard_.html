@@ -141,7 +141,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px;
+        padding: 2px;
         background-color: black;
         color: white;
         position: fixed;
@@ -579,11 +579,11 @@
         }
       }
 
-      @media screen and (max-width: 600px) {
+      /* @media screen and (max-width: 600px) {
         .wrapper .carousel {
           grid-auto-columns: 100%;
         }
-      }
+      } */
     </style>
     <style>
       @media screen and (max-width: 790px) {
@@ -3231,11 +3231,11 @@
           </a>
         </li>
         <li>
-          <a href="#" class="menu-item">
+          <a href="greyhound.html" class="menu-item">
             <img
               src="./public/assets/side-menu-icons/light-icons/royal-casino.png"
               alt=""
-            /><span class="ml-1">Grayhound</span>
+            /><span class="ml-1">Greyhound</span>
           </a>
         </li>
         <li>
@@ -3447,11 +3447,11 @@
       };
 
       const autoPlay = () => {
-        if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
+        if (window.innerWidth < 200) return; // Return if window is smaller than 800 or isAutoPlay is false
         // Autoplay the carousel after every 2500 ms
         timeoutId = setTimeout(
           () => (carousel.scrollLeft += firstCardWidth),
-          2500
+          2000
         );
       };
       autoPlay();
